@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+
+        // Fabric
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+    }
+}
+
+rootProject.name = 'PlaytimeUtils'
+
+include(
+        'bukkit',
+        'bungee',
+        'fabric',
+        'forge',
+        'common'
+)
