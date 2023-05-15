@@ -1,12 +1,10 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit;
 
-import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.isFolia;
-import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.isPaper;
-import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.isSpigot;
-import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.isCraftBukkit;
-
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlaytimeUtils;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.*;
 
 public class BukkitMain extends JavaPlugin {
     PlaytimeUtils playtimeUtils;
@@ -41,6 +39,17 @@ public class BukkitMain extends JavaPlugin {
         // Start PlaytimeUtils
         playtimeUtils = new PlaytimeUtils("plugins", getLogger());
         playtimeUtils.start();
+
+        // Start Playtime Tracker
+        repeatTaskAsync(() -> playtimeUtils.dataSource.updatePlaytime(
+                BukkitUtils.mapPlayers(
+                        getServer().getOnlinePlayers().toArray(new Player[0]),
+                        playtimeUtils.getServerName()
+                )),
+        0L, 20*60L);
+
+        // Register event listener
+        getServer().getPluginManager().registerEvents(new BukkitEventListener(), this);
 
         // Plugin enable message
         getLogger().info("PlaytimeUtils has been enabled!");

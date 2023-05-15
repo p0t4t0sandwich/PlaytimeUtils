@@ -2,7 +2,7 @@ package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
 
 public class PlayerInstance {
     /**
-     * Class used to abstract the player data to be used in the DataAccumulator class.
+     * Class used to abstract the player data to be used in the DataSource class.
      * playerName: The player's name.
      * playerUUID: The player's UUID.
      * currentServer: The server the player is currently on.

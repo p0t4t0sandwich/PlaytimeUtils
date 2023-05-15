@@ -4,10 +4,10 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import dev.dejvokep.boostedyaml.YamlDocument;
 import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class MongoDBDataSource implements DataSource {
     /**
@@ -19,18 +19,14 @@ public class MongoDBDataSource implements DataSource {
 
     /**
      * Constructor for the MongoDBDataSource class
-     * @param host The host of the MongoDB server
-     * @param port The port of the MongoDB server
-     * @param database The database to use
-     * @param username The username to use
-     * @param password The password to use
+     * @param config The configuration for the MongoDB data source.
      */
-    MongoDBDataSource(Map<String, Object> config) {
-        String host = (String) config.get("host");
-        int port = (int) config.get("port");
-        String database = (String) config.get("database");
-        String username = (String) config.get("username");
-        String password = (String) config.get("password");
+    MongoDBDataSource(YamlDocument config) {
+        String host = config.getString("storage.config.host");
+        int port = Integer.parseInt(config.getString("storage.config.port"));
+        String database = config.getString("storage.config.database");
+        String username = config.getString("storage.config.username");
+        String password = config.getString("storage.config.password");
 
         if (port == 0) {
             port = 27017;
@@ -45,6 +41,9 @@ public class MongoDBDataSource implements DataSource {
      */
     @Override
     public void updatePlaytime(ArrayList<PlayerInstance> players) {
+        if (players.size() == 0) {
+            return;
+        }
         System.out.println("Updating playtime for " + players.size() + " players");
         for (PlayerInstance player : players) {
             String server_name = player.getCurrentServer();
@@ -66,7 +65,11 @@ public class MongoDBDataSource implements DataSource {
                 }
 
                 // Get playtime for server
-                int playtime = player_data.getInteger("playtime." + server_name);
+                int playtime = 0;
+                Document playtime_data = (Document) player_data.get("playtime");
+                if (playtime_data != null && playtime_data.get(server_name) != null) {
+                    playtime = ((Document) player_data.get("playtime")).getInteger(server_name);
+                }
 
                 // Update playtime
                 Document update = new Document("playtime." + server_name, playtime + 1);
@@ -107,7 +110,7 @@ public class MongoDBDataSource implements DataSource {
             }
 
             // Get last streak
-            long last_streak = player_data.getLong("last_streak");
+            long last_streak = Long.valueOf(player_data.getLong("last_streak"));
             long timeval = unixTime - last_streak - (unixTime % 86400);
             streak = player_data.getInteger("streak");
 
@@ -118,11 +121,15 @@ public class MongoDBDataSource implements DataSource {
                 streak = 1;
                 update = update.append("last_streak", unixTime)
                         .append("streak", streak);
+
+                // TODO: onStreakReset event
             } else if (timeval > 0 && timeval < 86400) {
                 // Increment Streak
                 streak++;
                 update = update.append("last_streak", unixTime)
                         .append("streak", streak);
+
+                // TODO: onStreakIncrement event
             }
             collection.updateOne(query, new Document("$set", update));
         } catch (Exception e) {

@@ -59,4 +59,4 @@ cd ./playtimeutils
 zip -r ./playtimeutils.zip ./*
 
 # Rename Jar
-mv ./playtimeutils.zip ../../build/libs/PanelServerManager-$VERSION-$MC_VERSION.jar
+mv ./playtimeutils.zip ../../build/libs/PlaytimeUtils-$VERSION-$MC_VERSION.jar

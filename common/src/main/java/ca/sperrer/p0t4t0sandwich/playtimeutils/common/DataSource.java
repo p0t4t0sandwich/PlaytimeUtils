@@ -1,14 +1,15 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
 
+import dev.dejvokep.boostedyaml.YamlDocument;
+
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface DataSource {
-    static DataSource getDataSource(String type, Map<String, Object> config) {
+    static DataSource getDataSource(String type, YamlDocument config) {
         switch (type) {
-            case "sql":
+            case "mysql":
                 return new SQLDataSource(config);
-            case "mongo":
+            case "mongodb":
                 return new MongoDBDataSource(config);
             default:
                 return null;

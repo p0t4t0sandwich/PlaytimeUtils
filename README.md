@@ -10,3 +10,6 @@ Plugin for various playtime-related tools
 - [ ] API for all that stuff
 - [ ] Add a command to check streak
 - [ ] Check the progress till the next rank
+- [ ] add sqlite support
+- [ ] add h2 support
+- [ ] add filestorage support

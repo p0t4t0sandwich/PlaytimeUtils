@@ -4,9 +4,8 @@ import dev.dejvokep.boostedyaml.YamlDocument;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Objects;
-
-import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
 
 public class PlaytimeUtils {
     /**
@@ -20,6 +19,7 @@ public class PlaytimeUtils {
     private final Object logger;
     private static PlaytimeUtils singleton = null;
     private boolean STARTED = false;
+    public DataSource dataSource;
 
     /**
      * Constructor for the PlaytimeUtils class.
@@ -32,7 +32,7 @@ public class PlaytimeUtils {
 
         // Config
         try {
-            config = YamlDocument.create(new File("./" + configPath + "/PanelServerManager", "config.yml"),
+            config = YamlDocument.create(new File("./" + configPath + "/PlaytimeUtils", "config.yml"),
                     Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("config.yml"))
             );
             config.reload();
@@ -65,16 +65,24 @@ public class PlaytimeUtils {
     }
 
     /**
-     * Start PlaytimeUtils.
+     * Start PlaytimeUtils
      */
     public void start() {
         if (STARTED) {
             useLogger("PlaytimeUtils has already started!");
             return;
         }
-        runTaskAsync(() -> {
-            STARTED = true;
-            useLogger("PlaytimeUtils has been started!");
-        });
+        STARTED = true;
+        String type = config.getString("storage.type");
+        dataSource = DataSource.getDataSource(type, config);
+        useLogger("PlaytimeUtils has been started!");
+    }
+
+    /**
+     * Get the server name from the config
+     * @return The server name
+     */
+    public String getServerName() {
+        return config.getString("server.name");
     }
 }

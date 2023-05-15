@@ -2,13 +2,15 @@ package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import dev.dejvokep.boostedyaml.YamlDocument;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
+
+import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
 
 public class SQLDataSource implements DataSource {
     /**
@@ -21,17 +23,14 @@ public class SQLDataSource implements DataSource {
 
     /**
      * Constructor for the SQLDataSource class
-     * @param host The host of the SQL server
-     * @param database The database to use
-     * @param username The username to use
-     * @param password The password to use
+     * @param sql_config The configuration for the SQL data source.
      */
-    SQLDataSource(Map<String, Object> sql_config) {
-        String host = (String) sql_config.get("host");
-        int port = (int) sql_config.get("port");
-        String database = (String) sql_config.get("database");
-        String username = (String) sql_config.get("username");
-        String password = (String) sql_config.get("password");
+    SQLDataSource(YamlDocument sql_config) {
+        String host = sql_config.getString("storage.config.host");
+        int port = Integer.parseInt(sql_config.getString("storage.config.port"));
+        String database = sql_config.getString("storage.config.database");
+        String username = sql_config.getString("storage.config.username");
+        String password = sql_config.getString("storage.config.password");
 
         if (port == 0) {
             port = 3306;
@@ -61,6 +60,9 @@ public class SQLDataSource implements DataSource {
      */
     @Override
     public void updatePlaytime(ArrayList<PlayerInstance> players) {
+        if (players.size() == 0) {
+            return;
+        }
         System.out.println("Updating playtime for " + players.size() + " players");
         for (PlayerInstance player : players) {
             String server_name = player.getCurrentServer();
@@ -159,7 +161,6 @@ public class SQLDataSource implements DataSource {
             pst.executeUpdate();
 
             con.close();
-            return streak;
         } catch (SQLException e) {
             e.printStackTrace();
         }
