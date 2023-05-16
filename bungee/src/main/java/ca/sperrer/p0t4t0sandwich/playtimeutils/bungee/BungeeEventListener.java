@@ -25,7 +25,7 @@ public class BungeeEventListener implements Listener {
                 event.getPlayer().sendMessage(
                         new ComponentBuilder("§cYour streak has been reset!").create());
             } else if (streak != -1) {
-                plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer()));
+                plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
                 event.getPlayer().sendMessage(
                         new ComponentBuilder("§aYour streak is now " + streak + "!" + " Keep up the good work!").create());
             }

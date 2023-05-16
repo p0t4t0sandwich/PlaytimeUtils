@@ -1,7 +1,10 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.forge;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.events.StreakIncrementEvent;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.events.StreakResetEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,10 +38,10 @@ public class ForgeEventListener {
                     )
             );
             if (streak == 1) {
-                // TODO: Forge streakResetEvent
+                MinecraftForge.EVENT_BUS.post(new StreakResetEvent(player));
                 player.displayClientMessage(Component.empty().append("§cYour streak has been reset!"), false);
             } else if (streak != -1) {
-                // TODO: Forge streakIncrementEvent
+                MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
                 player.displayClientMessage(Component.empty().append("§aYour streak is now " + streak + "!" + " Keep up the good work!"), false);
             }
         });

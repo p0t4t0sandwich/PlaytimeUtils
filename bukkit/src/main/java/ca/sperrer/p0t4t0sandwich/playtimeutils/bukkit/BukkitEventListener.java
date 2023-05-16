@@ -16,8 +16,6 @@ public class BukkitEventListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        StreakIncrementEvent streakIncrementEvent = new StreakIncrementEvent(event.getPlayer());
-        StreakResetEvent streakResetEvent = new StreakResetEvent(event.getPlayer());
         runTaskAsync(() -> {
             int streak = plugin.playtimeUtils.dataSource.playerLoginData(
                     mapPlayer(
@@ -26,9 +24,11 @@ public class BukkitEventListener implements Listener {
                     )
             );
             if (streak == 1) {
+                StreakResetEvent streakResetEvent = new StreakResetEvent(event.getPlayer());
                 Bukkit.getPluginManager().callEvent(streakResetEvent);
                 event.getPlayer().sendMessage("§cYour streak has been reset!");
             } else if (streak != -1) {
+                StreakIncrementEvent streakIncrementEvent = new StreakIncrementEvent(event.getPlayer(), streak);
                 Bukkit.getPluginManager().callEvent(streakIncrementEvent);
                 event.getPlayer().sendMessage("§aYour streak is now " + streak + "!" + " Keep up the good work!");
             }

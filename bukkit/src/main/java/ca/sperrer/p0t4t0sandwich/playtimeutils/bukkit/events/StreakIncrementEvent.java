@@ -8,15 +8,17 @@ import org.bukkit.event.HandlerList;
 public class StreakIncrementEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
     private final Player player;
+    private final int streak;
     private boolean isCancelled;
 
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
-    public StreakIncrementEvent(Player player) {
+    public StreakIncrementEvent(Player player, int streak) {
         super(true);
         this.player = player;
+        this.streak = streak;
         this.isCancelled = false;
     }
 
@@ -37,5 +39,9 @@ public class StreakIncrementEvent extends Event implements Cancellable {
 
     public Player getPlayer() {
         return this.player;
+    }
+
+    public int getStreak() {
+        return this.streak;
     }
 }

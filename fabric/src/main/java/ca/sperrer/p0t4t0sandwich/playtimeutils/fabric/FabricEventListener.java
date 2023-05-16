@@ -1,5 +1,7 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.fabric;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.events.StreakIncrementEvent;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.events.StreakResetEvent;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -35,10 +37,10 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
                     )
             );
             if (streak == 1) {
-                // TODO: Fabric streakResetEvent
+                StreakResetEvent.EVENT.invoker().onStreakReset(handler.player);
                 handler.player.sendMessage(Text.of("§cYour streak has been reset!"));
             } else if (streak != -1) {
-                // TODO: Fabric streakIncrementEvent
+                StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
                 handler.player.sendMessage(Text.of("§aYour streak is now " + streak + "!" + " Keep up the good work!"));
             }
         });

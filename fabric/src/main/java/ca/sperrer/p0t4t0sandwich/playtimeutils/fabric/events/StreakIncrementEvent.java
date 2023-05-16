@@ -5,11 +5,11 @@ import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public interface StreakIncrementEvent {
-    Event<StreakIncrementEvent> EVENT = EventFactory.createArrayBacked(StreakIncrementEvent.class, (listeners) -> (player) -> {
+    Event<StreakIncrementEvent> EVENT = EventFactory.createArrayBacked(StreakIncrementEvent.class, (listeners) -> (player, streak) -> {
         for (StreakIncrementEvent listener : listeners) {
-            listener.onStreakIncrement(player);
+            listener.onStreakIncrement(player, streak);
         }
     });
 
-    void onStreakIncrement(ServerPlayerEntity player);
+    void onStreakIncrement(ServerPlayerEntity player, int streak);
 }
