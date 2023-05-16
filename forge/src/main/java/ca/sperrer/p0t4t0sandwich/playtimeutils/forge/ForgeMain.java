@@ -36,17 +36,14 @@ public class ForgeMain {
         // Singleton instance
         instance = this;
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    @SubscribeEvent
-    public void onServerStart(ServerStartingEvent event) {
         logger.info("[PlaytimeUtils]: PlaytimeUtils is running on " + getServerType() + ".");
 
         // Start PlaytimeUtils
         playtimeUtils = new PlaytimeUtils("config", logger);
         playtimeUtils.start();
+
+        // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.register(this);
 
         // Mod enable message
         logger.info("[PlaytimeUtils]: PlaytimeUtils has been enabled!");

@@ -39,7 +39,7 @@ public class FabricMain implements DedicatedServerModInitializer {
         // Get the server instance
         ServerLifecycleEvents.SERVER_STARTED.register(new FabricEventListener());
 
-        // Register events
+        // Register events TODO: Make this work
         StreakIncrementEvent.EVENT.register((player) -> {});
         StreakResetEvent.EVENT.register((player) -> {});
 

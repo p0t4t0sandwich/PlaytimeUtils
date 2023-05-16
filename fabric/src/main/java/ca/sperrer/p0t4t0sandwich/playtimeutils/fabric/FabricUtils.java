@@ -13,7 +13,7 @@ public class FabricUtils {
      * @return PlayerInstance
      */
     static PlayerInstance mapPlayer(ServerPlayerEntity player, String serverName) {
-        return new PlayerInstance(String.valueOf(player.getUuid()), player.getName().toString(), serverName);
+        return new PlayerInstance(player.getUuid().toString(), player.getName().toString(), serverName);
     }
 
     /**
