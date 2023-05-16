@@ -1,5 +1,8 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.bungee;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.events.StreakIncrementEvent;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.events.StreakResetEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -13,9 +16,20 @@ public class BungeeEventListener implements Listener {
 
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
-        runTaskAsync(() -> plugin.playtimeUtils.dataSource.playerLoginData(
-                mapPlayer(event.getPlayer())
-        ));
+        runTaskAsync(() -> {
+            int streak = plugin.playtimeUtils.dataSource.playerLoginData(
+                    mapPlayer(event.getPlayer())
+            );
+            if (streak == 1) {
+                plugin.getProxy().getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
+                event.getPlayer().sendMessage(
+                        new ComponentBuilder("§cYour streak has been reset!").create());
+            } else if (streak != -1) {
+                plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer()));
+                event.getPlayer().sendMessage(
+                        new ComponentBuilder("§aYour streak is now " + streak + "!" + " Keep up the good work!").create());
+            }
+        });
     }
 
     @EventHandler

@@ -1,5 +1,6 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -122,15 +123,16 @@ public class MongoDBDataSource implements DataSource {
                 update = update.append("last_streak", unixTime)
                         .append("streak", streak);
 
-                // TODO: onStreakReset event
             } else if (timeval > 0 && timeval < 86400) {
                 // Increment Streak
                 streak++;
                 update = update.append("last_streak", unixTime)
                         .append("streak", streak);
-
-                // TODO: onStreakIncrement event
+            } else {
+                // No change
+                streak = -1;
             }
+
             collection.updateOne(query, new Document("$set", update));
         } catch (Exception e) {
             e.printStackTrace();

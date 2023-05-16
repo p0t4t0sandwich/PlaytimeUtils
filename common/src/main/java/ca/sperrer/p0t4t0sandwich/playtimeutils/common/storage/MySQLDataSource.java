@@ -1,5 +1,6 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import dev.dejvokep.boostedyaml.YamlDocument;
@@ -10,9 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
-
-public class SQLDataSource implements DataSource {
+public class MySQLDataSource implements DataSource {
     /**
      * Class used to abstract the SQL data source.
      * config: The configuration for the SQL data source.
@@ -25,7 +24,7 @@ public class SQLDataSource implements DataSource {
      * Constructor for the SQLDataSource class
      * @param sql_config The configuration for the SQL data source.
      */
-    SQLDataSource(YamlDocument sql_config) {
+    MySQLDataSource(YamlDocument sql_config) {
         String host = sql_config.getString("storage.config.host");
         int port = Integer.parseInt(sql_config.getString("storage.config.port"));
         String database = sql_config.getString("storage.config.database");
@@ -127,8 +126,6 @@ public class SQLDataSource implements DataSource {
                 pst.setString(1, player_uuid);
                 pst.executeUpdate();
 
-                // TODO: onStreakReset event
-
                 SQL_QUERY = "UPDATE player_data SET last_streak = " + unixTime + " WHERE player_uuid = ?;";
                 pst = con.prepareStatement(SQL_QUERY);
                 pst.setString(1, player_uuid);
@@ -139,8 +136,6 @@ public class SQLDataSource implements DataSource {
                 pst = con.prepareStatement(SQL_QUERY);
                 pst.setString(1, player_uuid);
                 pst.executeUpdate();
-
-                // TODO: onStreakIncrement event
 
                 SQL_QUERY = "UPDATE player_data SET last_streak = " + unixTime + " WHERE player_uuid = ?;";
                 pst = con.prepareStatement(SQL_QUERY);
@@ -153,7 +148,11 @@ public class SQLDataSource implements DataSource {
                 rs = pst.executeQuery(SQL_QUERY);
                 rs.next();
                 streak = rs.getInt("streak");
+            } else {
+                // No change
+                streak = -1;
             }
+
             // Update Last Login
             SQL_QUERY = "UPDATE player_data SET last_online = " + unixTime + " WHERE player_uuid = ?;";
             pst = con.prepareStatement(SQL_QUERY);

@@ -1,5 +1,6 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import dev.dejvokep.boostedyaml.YamlDocument;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ public interface DataSource {
     static DataSource getDataSource(String type, YamlDocument config) {
         switch (type) {
             case "mysql":
-                return new SQLDataSource(config);
+                return new MySQLDataSource(config);
             case "mongodb":
                 return new MongoDBDataSource(config);
             default:

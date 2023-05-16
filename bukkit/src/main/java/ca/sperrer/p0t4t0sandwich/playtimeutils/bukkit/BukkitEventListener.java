@@ -1,5 +1,8 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.events.StreakIncrementEvent;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.events.StreakResetEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -13,12 +16,23 @@ public class BukkitEventListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        runTaskAsync(() -> plugin.playtimeUtils.dataSource.playerLoginData(
-                mapPlayer(
-                        event.getPlayer(),
-                        plugin.playtimeUtils.getServerName()
-                )
-        ));
+        StreakIncrementEvent streakIncrementEvent = new StreakIncrementEvent(event.getPlayer());
+        StreakResetEvent streakResetEvent = new StreakResetEvent(event.getPlayer());
+        runTaskAsync(() -> {
+            int streak = plugin.playtimeUtils.dataSource.playerLoginData(
+                    mapPlayer(
+                            event.getPlayer(),
+                            plugin.playtimeUtils.getServerName()
+                    )
+            );
+            if (streak == 1) {
+                Bukkit.getPluginManager().callEvent(streakResetEvent);
+                event.getPlayer().sendMessage("§cYour streak has been reset!");
+            } else if (streak != -1) {
+                Bukkit.getPluginManager().callEvent(streakIncrementEvent);
+                event.getPlayer().sendMessage("§aYour streak is now " + streak + "!" + " Keep up the good work!");
+            }
+        });
     }
 
     @EventHandler
