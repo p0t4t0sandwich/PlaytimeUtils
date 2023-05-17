@@ -12,6 +12,7 @@ Plugin for various playtime-related tools
   - [x] Bungee
   - [ ] Fabric -- still needs some work on triggering events
   - [ ] Forge
+  - [x] Velocity
 - [ ] API for all that stuff
 - [ ] Add a command to check streak
 - [ ] Check the progress till the next rank
