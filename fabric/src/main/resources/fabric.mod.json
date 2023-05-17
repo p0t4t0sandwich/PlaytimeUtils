@@ -12,7 +12,7 @@
   "icon": "assets/PanelServerManager/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "server": [
       "ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.FabricMain"
     ]
   },

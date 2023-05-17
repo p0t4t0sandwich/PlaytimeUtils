@@ -13,7 +13,7 @@ public class ForgeUtils {
      * @return PlayerInstance
      */
     public static PlayerInstance mapPlayer(ServerPlayer player, String serverName) {
-        return new PlayerInstance(player.getUUID().toString(), player.getName().toString(), serverName);
+        return new PlayerInstance(player.getName().toString(), player.getUUID().toString(), serverName);
     }
 
     /**
