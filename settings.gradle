@@ -17,5 +17,6 @@ include(
         'bungee',
         'fabric',
         'forge',
+        'velocity',
         'common'
 )

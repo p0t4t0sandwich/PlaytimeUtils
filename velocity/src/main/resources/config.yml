@@ -1,0 +1,16 @@
+---
+version: 1
+
+# Database configuration
+storage:
+  type: mongodb
+  config:
+    host: localhost
+    port: 27017
+    database: playerdata
+    username: root
+    password: password
+
+# Server configuration -- Ignore if you're using a proxy
+server:
+  name: ExampleServer

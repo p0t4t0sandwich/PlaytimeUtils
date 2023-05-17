@@ -1,31 +1,29 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.velocity;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
-import org.bukkit.entity.Player;
+import com.velocitypowered.api.proxy.Player;
 
 import java.util.ArrayList;
 
-public class BukkitUtils {
+public class VelocityUtils {
     /**
      * Maps a Bukkit Player to a PlayerInstance.
      * @param player Bukkit Player
-     * @param serverName Name of the server
      * @return PlayerInstance
      */
-    static PlayerInstance mapPlayer(Player player, String serverName) {
-        return new PlayerInstance(player.getUniqueId().toString(), player.getName(), serverName);
+    static PlayerInstance mapPlayer(Player player) {
+        return new PlayerInstance(player.getUniqueId().toString(), player.getUsername(), player.getCurrentServer().toString());
     }
 
     /**
      * Maps an array of Bukkit Players to an ArrayList of PlayerInstances.
      * @param players Array of Bukkit Players
-     * @param serverName Name of the server
      * @return ArrayList of PlayerInstances
      */
-    static ArrayList<PlayerInstance> mapPlayers(Player[] players, String serverName) {
+    static ArrayList<PlayerInstance> mapPlayers(Player[] players) {
         ArrayList<PlayerInstance> playerInstances = new ArrayList<>();
         for (Player player : players) {
-            playerInstances.add(mapPlayer(player, serverName));
+            playerInstances.add(mapPlayer(player));
         }
         return playerInstances;
     }
