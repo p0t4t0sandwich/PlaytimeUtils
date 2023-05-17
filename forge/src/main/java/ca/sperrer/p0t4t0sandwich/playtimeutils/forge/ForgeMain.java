@@ -2,6 +2,7 @@ package ca.sperrer.p0t4t0sandwich.playtimeutils.forge;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlaytimeUtils;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.listeners.ForgeEventListener;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.test.ForgeTestListener;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -37,7 +38,10 @@ public class ForgeMain {
         playtimeUtils.start();
 
         // Register event listener
-        MinecraftForge.EVENT_BUS.register(ForgeEventListener.class);
+        MinecraftForge.EVENT_BUS.register(new ForgeEventListener());
+
+        // Test event listeners (TODO: Remove later)
+//        MinecraftForge.EVENT_BUS.register(new ForgeTestListener());
 
         // Mod enable message
         logger.info("[PlaytimeUtils]: PlaytimeUtils has been enabled!");

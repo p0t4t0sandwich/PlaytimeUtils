@@ -32,8 +32,8 @@ public class BungeeEventListener implements Listener {
             }
 
             // Test event listener (TODO: remove later)
-            plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
-            plugin.getProxy().getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
+//            plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
+//            plugin.getProxy().getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
         });
     }
 

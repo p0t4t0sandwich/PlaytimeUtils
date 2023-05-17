@@ -33,8 +33,8 @@ public class BukkitEventListener implements Listener {
             }
 
             // Test event listener (TODO: remove later)
-            Bukkit.getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
-            Bukkit.getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
+//            Bukkit.getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
+//            Bukkit.getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
         });
     }
 

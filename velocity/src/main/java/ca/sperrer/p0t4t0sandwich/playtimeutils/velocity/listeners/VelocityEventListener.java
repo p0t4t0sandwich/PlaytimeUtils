@@ -16,9 +16,9 @@ public class VelocityEventListener {
 
     @Subscribe
     public void onPlayerLogin(LoginEvent event) {
-        runTaskAsync(() -> {
+//        runTaskAsync(() -> {
             int streak = plugin.playtimeUtils.dataSource.playerLoginData(
-                    mapPlayer(event.getPlayer())
+                mapPlayer(event.getPlayer())
             );
             if (streak == 1) {
                 plugin.getServer().getEventManager().fire(new StreakResetEvent(event.getPlayer()));
@@ -29,15 +29,15 @@ public class VelocityEventListener {
             }
 
             // Test event listener (TODO: Remove later)
-            plugin.getServer().getEventManager().fire(new StreakIncrementEvent(event.getPlayer(), streak));
-            plugin.getServer().getEventManager().fire(new StreakResetEvent(event.getPlayer()));
-        });
+//            plugin.getServer().getEventManager().fire(new StreakIncrementEvent(event.getPlayer(), streak));
+//            plugin.getServer().getEventManager().fire(new StreakResetEvent(event.getPlayer()));
+//        });
     }
 
     @Subscribe
     public void onPlayerQuit(DisconnectEvent event) {
         runTaskAsync(() -> plugin.playtimeUtils.dataSource.playerLogoutData(
-                mapPlayer(event.getPlayer())
+            mapPlayer(event.getPlayer())
         ));
     }
 }

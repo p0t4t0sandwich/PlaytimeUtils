@@ -111,7 +111,13 @@ public class MongoDBDataSource implements DataSource {
             }
 
             // Get last streak
-            long last_streak = Long.valueOf(player_data.getInteger("last_streak"));
+            long last_streak;
+            try {
+                last_streak = Long.valueOf(player_data.getInteger("last_streak"));
+            } catch (Exception e) {
+                last_streak = player_data.getLong("last_streak");
+            }
+
             long timeval = unixTime - last_streak - (unixTime % 86400);
             streak = player_data.getInteger("streak");
 

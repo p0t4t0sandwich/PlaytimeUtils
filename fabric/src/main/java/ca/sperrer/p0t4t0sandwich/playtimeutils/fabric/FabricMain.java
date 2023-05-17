@@ -49,8 +49,8 @@ public class FabricMain implements DedicatedServerModInitializer {
         StreakResetEvent.EVENT.register((player) -> {});
 
         // Test event listener (TODO: Remove later)
-        StreakIncrementEvent.EVENT.register(new FabricTestListener());
-        StreakResetEvent.EVENT.register(new FabricTestListener());
+//        StreakIncrementEvent.EVENT.register(new FabricTestListener());
+//        StreakResetEvent.EVENT.register(new FabricTestListener());
 
         // Mod enable message
         logger.info("[PlaytimeUtils]: PlaytimeUtils has been enabled!");

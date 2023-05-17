@@ -48,8 +48,8 @@ public class ForgeEventListener {
             }
 
             // Test event listeners (TODO: Remove later)
-            MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
-            MinecraftForge.EVENT_BUS.post(new StreakResetEvent(player));
+//            MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
+//            MinecraftForge.EVENT_BUS.post(new StreakResetEvent(player));
         });
     }
 

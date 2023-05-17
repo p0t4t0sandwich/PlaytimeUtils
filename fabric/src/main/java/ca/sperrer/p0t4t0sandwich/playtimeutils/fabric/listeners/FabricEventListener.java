@@ -47,8 +47,8 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
             }
 
             // Test event listener (TODO: Remove later)
-            StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
-            StreakResetEvent.EVENT.invoker().onStreakReset(handler.player);
+//            StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
+//            StreakResetEvent.EVENT.invoker().onStreakReset(handler.player);
         });
     }
 
