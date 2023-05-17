@@ -1,5 +1,7 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.forge;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.forge.listeners;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.ForgeMain;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.ForgeUtils;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.events.StreakIncrementEvent;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.events.StreakResetEvent;
 import net.minecraft.network.chat.Component;
@@ -20,10 +22,10 @@ public class ForgeEventListener {
     public void onServerStart(ServerStartingEvent event) {
         // Start Playtime Tracker
         repeatTaskAsync(() -> mod.playtimeUtils.dataSource.updatePlaytime(
-                        ForgeUtils.mapPlayers(
-                                event.getServer().getPlayerList().getPlayers().toArray(new ServerPlayer[0]),
-                                mod.playtimeUtils.getServerName()
-                        )),
+            ForgeUtils.mapPlayers(
+                    event.getServer().getPlayerList().getPlayers().toArray(new ServerPlayer[0]),
+                    mod.playtimeUtils.getServerName()
+            )),
         0L, 20*60L);
     }
 
@@ -44,6 +46,10 @@ public class ForgeEventListener {
                 MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
                 player.displayClientMessage(Component.empty().append("§aYour streak is now " + streak + "!" + " Keep up the good work!"), false);
             }
+
+            // Test event listeners (TODO: Remove later)
+            MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
+            MinecraftForge.EVENT_BUS.post(new StreakResetEvent(player));
         });
     }
 

@@ -1,5 +1,6 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.listeners;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.BukkitMain;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.events.StreakIncrementEvent;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.events.StreakResetEvent;
 import org.bukkit.Bukkit;
@@ -24,14 +25,16 @@ public class BukkitEventListener implements Listener {
                     )
             );
             if (streak == 1) {
-                StreakResetEvent streakResetEvent = new StreakResetEvent(event.getPlayer());
-                Bukkit.getPluginManager().callEvent(streakResetEvent);
+                Bukkit.getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
                 event.getPlayer().sendMessage("§cYour streak has been reset!");
             } else if (streak != -1) {
-                StreakIncrementEvent streakIncrementEvent = new StreakIncrementEvent(event.getPlayer(), streak);
-                Bukkit.getPluginManager().callEvent(streakIncrementEvent);
+                Bukkit.getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
                 event.getPlayer().sendMessage("§aYour streak is now " + streak + "!" + " Keep up the good work!");
             }
+
+            // Test event listener (TODO: remove later)
+            Bukkit.getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
+            Bukkit.getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
         });
     }
 

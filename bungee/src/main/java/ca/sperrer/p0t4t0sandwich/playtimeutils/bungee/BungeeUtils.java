@@ -11,7 +11,7 @@ public class BungeeUtils {
      * @param player Bungee Player
      * @return PlayerInstance
      */
-    static PlayerInstance mapPlayer(ProxiedPlayer player) {
+    public static PlayerInstance mapPlayer(ProxiedPlayer player) {
         return new PlayerInstance(
                 String.valueOf(player.getUniqueId()),
                 player.getName(),
@@ -24,7 +24,7 @@ public class BungeeUtils {
      * @param players Array of Bungee Players
      * @return ArrayList of PlayerInstances
      */
-    static ArrayList<PlayerInstance> mapPlayers(ProxiedPlayer[] players) {
+    public static ArrayList<PlayerInstance> mapPlayers(ProxiedPlayer[] players) {
         ArrayList<PlayerInstance> playerInstances = new ArrayList<>();
         for (ProxiedPlayer player : players) {
             playerInstances.add(mapPlayer(player));

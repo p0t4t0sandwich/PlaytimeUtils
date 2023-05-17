@@ -11,8 +11,8 @@ public class VelocityUtils {
      * @param player Bukkit Player
      * @return PlayerInstance
      */
-    static PlayerInstance mapPlayer(Player player) {
-        return new PlayerInstance(player.getUniqueId().toString(), player.getUsername(), player.getCurrentServer().toString());
+    public static PlayerInstance mapPlayer(Player player) {
+        return new PlayerInstance(player.getUniqueId().toString(), player.getUsername(), player.getCurrentServer().get().getServerInfo().getName());
     }
 
     /**
@@ -20,7 +20,7 @@ public class VelocityUtils {
      * @param players Array of Bukkit Players
      * @return ArrayList of PlayerInstances
      */
-    static ArrayList<PlayerInstance> mapPlayers(Player[] players) {
+    public static ArrayList<PlayerInstance> mapPlayers(Player[] players) {
         ArrayList<PlayerInstance> playerInstances = new ArrayList<>();
         for (Player player : players) {
             playerInstances.add(mapPlayer(player));

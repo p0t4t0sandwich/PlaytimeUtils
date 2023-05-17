@@ -1,5 +1,6 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.bungee;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.listeners;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.BungeeMain;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.events.StreakIncrementEvent;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.events.StreakResetEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -29,6 +30,10 @@ public class BungeeEventListener implements Listener {
                 event.getPlayer().sendMessage(
                         new ComponentBuilder("§aYour streak is now " + streak + "!" + " Keep up the good work!").create());
             }
+
+            // Test event listener (TODO: remove later)
+            plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
+            plugin.getProxy().getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
         });
     }
 

@@ -1,5 +1,6 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.velocity;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.listeners;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.VelocityMain;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.events.StreakIncrementEvent;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.events.StreakResetEvent;
 import com.velocitypowered.api.event.Subscribe;
@@ -26,6 +27,10 @@ public class VelocityEventListener {
                 plugin.getServer().getEventManager().fire(new StreakIncrementEvent(event.getPlayer(), streak));
                 event.getPlayer().sendMessage(Component.text("§aYour streak is now " + streak + "!" + " Keep up the good work!"));
             }
+
+            // Test event listener (TODO: Remove later)
+            plugin.getServer().getEventManager().fire(new StreakIncrementEvent(event.getPlayer(), streak));
+            plugin.getServer().getEventManager().fire(new StreakResetEvent(event.getPlayer()));
         });
     }
 
@@ -35,5 +40,4 @@ public class VelocityEventListener {
                 mapPlayer(event.getPlayer())
         ));
     }
-
 }

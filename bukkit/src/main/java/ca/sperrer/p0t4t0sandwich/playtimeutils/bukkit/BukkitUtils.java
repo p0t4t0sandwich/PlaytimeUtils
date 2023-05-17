@@ -12,7 +12,7 @@ public class BukkitUtils {
      * @param serverName Name of the server
      * @return PlayerInstance
      */
-    static PlayerInstance mapPlayer(Player player, String serverName) {
+    public static PlayerInstance mapPlayer(Player player, String serverName) {
         return new PlayerInstance(player.getUniqueId().toString(), player.getName(), serverName);
     }
 
@@ -22,7 +22,7 @@ public class BukkitUtils {
      * @param serverName Name of the server
      * @return ArrayList of PlayerInstances
      */
-    static ArrayList<PlayerInstance> mapPlayers(Player[] players, String serverName) {
+    public static ArrayList<PlayerInstance> mapPlayers(Player[] players, String serverName) {
         ArrayList<PlayerInstance> playerInstances = new ArrayList<>();
         for (Player player : players) {
             playerInstances.add(mapPlayer(player, serverName));

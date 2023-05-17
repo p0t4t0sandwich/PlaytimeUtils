@@ -12,7 +12,7 @@ public class FabricUtils {
      * @param serverName Name of the server
      * @return PlayerInstance
      */
-    static PlayerInstance mapPlayer(ServerPlayerEntity player, String serverName) {
+    public static PlayerInstance mapPlayer(ServerPlayerEntity player, String serverName) {
         return new PlayerInstance(player.getUuid().toString(), player.getName().toString(), serverName);
     }
 
@@ -22,7 +22,7 @@ public class FabricUtils {
      * @param serverName Name of the server
      * @return ArrayList of PlayerInstances
      */
-    static ArrayList<PlayerInstance> mapPlayers(ServerPlayerEntity[] players, String serverName) {
+    public static ArrayList<PlayerInstance> mapPlayers(ServerPlayerEntity[] players, String serverName) {
         ArrayList<PlayerInstance> playerInstances = new ArrayList<>();
         for (ServerPlayerEntity player : players) {
             playerInstances.add(mapPlayer(player, serverName));

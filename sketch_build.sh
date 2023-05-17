@@ -27,12 +27,16 @@ mv ./fabric-*.jar ./fabric.zip
 cp ../forge/build/libs/forge-*.jar ./
 mv ./forge-*.jar ./forge.zip
 
+cp ../velocity/build/libs/velocity-*.jar ./
+mv ./velocity-*.jar ./velocity.zip
+
 # Unzip Jars
 unzip ./bukkit.zip -d ./bukkit
 unzip ./bungee.zip -d ./bungee
 unzip ./common.zip -d ./common
 unzip ./fabric.zip -d ./fabric
 unzip ./forge.zip -d ./forge
+unzip ./velocity.zip -d ./velocity
 
 # Process Jars
 cp -r ./bukkit/ca/sperrer/p0t4t0sandwich/playtimeutils/bukkit ./playtimeutils/ca/sperrer/p0t4t0sandwich/playtimeutils/bukkit
@@ -53,6 +57,10 @@ cp -r ./fabric/assets ./playtimeutils
 cp -r ./forge/ca/sperrer/p0t4t0sandwich/playtimeutils/forge ./playtimeutils/ca/sperrer/p0t4t0sandwich/playtimeutils/forge
 cp ./forge/pack.mcmeta ./playtimeutils
 cp ./forge/META-INF/mods.toml ./playtimeutils/META-INF
+
+cp -r ./velocity/ca/sperrer/p0t4t0sandwich/playtimeutils/velocity ./playtimeutils/ca/sperrer/p0t4t0sandwich/playtimeutils/velocity
+cp ./velocity/velocity.yml ./playtimeutils
+cp ./velocity/velocity-plugin.json ./playtimeutils
 
 # Zip Jar contents
 cd ./playtimeutils

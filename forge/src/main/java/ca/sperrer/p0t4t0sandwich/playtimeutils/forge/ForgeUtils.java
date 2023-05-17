@@ -12,7 +12,7 @@ public class ForgeUtils {
      * @param serverName Name of the server
      * @return PlayerInstance
      */
-    static PlayerInstance mapPlayer(ServerPlayer player, String serverName) {
+    public static PlayerInstance mapPlayer(ServerPlayer player, String serverName) {
         return new PlayerInstance(player.getUUID().toString(), player.getName().toString(), serverName);
     }
 
@@ -22,7 +22,7 @@ public class ForgeUtils {
      * @param serverName Name of the server
      * @return ArrayList of PlayerInstances
      */
-    static ArrayList<PlayerInstance> mapPlayers(ServerPlayer[] players, String serverName) {
+    public static ArrayList<PlayerInstance> mapPlayers(ServerPlayer[] players, String serverName) {
         ArrayList<PlayerInstance> playerInstances = new ArrayList<>();
         for (ServerPlayer player : players) {
             playerInstances.add(mapPlayer(player, serverName));

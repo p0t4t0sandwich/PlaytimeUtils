@@ -1,6 +1,7 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.forge;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlaytimeUtils;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.forge.listeners.ForgeEventListener;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -8,7 +9,7 @@ import org.slf4j.Logger;
 
 @Mod(ForgeMain.MODID)
 public class ForgeMain {
-    PlaytimeUtils playtimeUtils;
+    public PlaytimeUtils playtimeUtils;
     public static final String MODID = "playtimeutils";
     public static final Logger logger = LogUtils.getLogger();
 

@@ -1,5 +1,7 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.listeners.BukkitEventListener;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.test.BukkitTestListener;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlaytimeUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -7,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.*;
 
 public class BukkitMain extends JavaPlugin {
-    PlaytimeUtils playtimeUtils;
+    public PlaytimeUtils playtimeUtils;
 
     // Singleton instance
     private static BukkitMain instance;
@@ -50,6 +52,9 @@ public class BukkitMain extends JavaPlugin {
 
         // Register event listener
         getServer().getPluginManager().registerEvents(new BukkitEventListener(), this);
+
+        // Test event listener (TODO: remove later)
+         getServer().getPluginManager().registerEvents(new BukkitTestListener(), this);
 
         // Plugin enable message
         getLogger().info("PlaytimeUtils has been enabled!");

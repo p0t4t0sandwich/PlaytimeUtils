@@ -1,5 +1,7 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.fabric;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.listeners;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.FabricMain;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.FabricUtils;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.events.StreakIncrementEvent;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.fabric.events.StreakResetEvent;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -43,6 +45,10 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
                 StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
                 handler.player.sendMessage(Text.of("§aYour streak is now " + streak + "!" + " Keep up the good work!"));
             }
+
+            // Test event listener (TODO: Remove later)
+            StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
+            StreakResetEvent.EVENT.invoker().onStreakReset(handler.player);
         });
     }
 
