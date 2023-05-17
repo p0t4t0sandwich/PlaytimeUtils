@@ -12,11 +12,8 @@ public class BungeeUtils {
      * @return PlayerInstance
      */
     public static PlayerInstance mapPlayer(ProxiedPlayer player) {
-        return new PlayerInstance(
-                String.valueOf(player.getUniqueId()),
-                player.getName(),
-                player.getServer().getInfo().getName()
-        );
+        String serverName = player.getServer() == null ? "null" : player.getServer().getInfo().getName();
+        return new PlayerInstance(player.getUniqueId().toString(), player.getName(), serverName);
     }
 
     /**

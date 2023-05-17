@@ -28,6 +28,11 @@ public class VelocityMain {
     @Inject
     private Logger logger;
 
+    // Get logger
+    public Logger getLogger() {
+        return this.logger;
+    }
+
     // Get server type
     public String getServerType() {
         return "Velocity";

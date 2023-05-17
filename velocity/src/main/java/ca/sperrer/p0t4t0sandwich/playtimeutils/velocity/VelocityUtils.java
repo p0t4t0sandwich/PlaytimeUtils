@@ -2,8 +2,10 @@ package ca.sperrer.p0t4t0sandwich.playtimeutils.velocity;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import com.velocitypowered.api.proxy.Player;
+import com.velocitypowered.api.proxy.ServerConnection;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class VelocityUtils {
     /**
@@ -12,7 +14,9 @@ public class VelocityUtils {
      * @return PlayerInstance
      */
     public static PlayerInstance mapPlayer(Player player) {
-        return new PlayerInstance(player.getUniqueId().toString(), player.getUsername(), player.getCurrentServer().get().getServerInfo().getName());
+        Optional<ServerConnection> option = player.getCurrentServer();
+        String serverName = option.map(serverConnection -> serverConnection.getServerInfo().getName()).orElse("null");
+        return new PlayerInstance(player.getUniqueId().toString(), player.getUsername(), serverName);
     }
 
     /**
