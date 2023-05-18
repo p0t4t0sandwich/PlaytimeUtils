@@ -4,15 +4,10 @@ Plugin for various playtime-related tools
 
 ## TODO
 
-- [ ] Add Velocity support
+- [x] Add Velocity support
 - [ ] Add a command to check playtime
 - [ ] Add a command to check playtime of other players
-- [ ] Events for streak increase/reset
-  - [x] Bukkit
-  - [x] Bungee
-  - [ ] Fabric -- still needs some work on triggering events
-  - [ ] Forge
-  - [x] Velocity
+- [x] Events for streak increase/reset
 - [ ] API for all that stuff
 - [ ] Add a command to check streak
 - [ ] Check the progress till the next rank

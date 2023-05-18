@@ -13,6 +13,7 @@ pluginManagement {
 rootProject.name = 'PlaytimeUtils'
 
 include(
+        'api',
         'bukkit',
         'bungee',
         'fabric',
