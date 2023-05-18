@@ -1,37 +1,43 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
-import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.MongoDBPlaytimeData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.MySQLPlaytimeData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.PlaytimeData;
 import dev.dejvokep.boostedyaml.YamlDocument;
 
-import java.util.ArrayList;
 
 public interface DataSource {
-    static DataSource getDataSource(String type, YamlDocument config) {
+    /**
+     * Get the database
+     * @param type The type of database
+     * @param config The config file
+     * @return The database
+     */
+    static Database getDataSource(String type, YamlDocument config) {
         switch (type) {
             case "mysql":
-                return new MySQLDataSource(config);
+                return new MySQLDatabase(config);
             case "mongodb":
-                return new MongoDBDataSource(config);
+                return new MongoDBDatabase(config);
             default:
                 return null;
         }
     }
 
     /**
-     * Update the playtime of all players on the server
-     * @param players The list of players to update
+     * Get the playtime data class
+     * @param type The type of database
+     * @param database The database
+     * @return The playtime data class
      */
-    void updatePlaytime(ArrayList<PlayerInstance> players);
-
-    /**
-     * Update a player's last login time, and update their streak if necessary
-     * @param player The player to update
-     */
-    int playerLoginData(PlayerInstance player);
-
-    /**
-     * Update a player's last logout time
-     * @param player The player to update
-     */
-    void playerLogoutData(PlayerInstance player);
+    static PlaytimeData getPlaytimeData(String type, Database database) {
+        switch (type) {
+            case "mysql":
+                return new MySQLPlaytimeData(database);
+            case "mongodb":
+                return new MongoDBPlaytimeData(database);
+            default:
+                return null;
+        }
+    }
 }

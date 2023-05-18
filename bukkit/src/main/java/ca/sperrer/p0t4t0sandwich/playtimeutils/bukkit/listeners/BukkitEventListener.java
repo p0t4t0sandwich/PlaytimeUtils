@@ -18,7 +18,7 @@ public class BukkitEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         runTaskAsync(() -> {
-            int streak = plugin.playtimeUtils.dataSource.playerLoginData(
+            int streak = plugin.playtimeUtils.playtimeData.playerLoginData(
                     mapPlayer(
                             event.getPlayer(),
                             plugin.playtimeUtils.getServerName()
@@ -33,14 +33,14 @@ public class BukkitEventListener implements Listener {
             }
 
             // Test event listener (TODO: remove later)
-//            Bukkit.getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
-//            Bukkit.getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
+            Bukkit.getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
+            Bukkit.getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
         });
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        runTaskAsync(() -> plugin.playtimeUtils.dataSource.playerLogoutData(
+        runTaskAsync(() -> plugin.playtimeUtils.playtimeData.playerLogoutData(
                 mapPlayer(
                         event.getPlayer(),
                         plugin.playtimeUtils.getServerName()

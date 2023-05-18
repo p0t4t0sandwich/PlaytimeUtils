@@ -1,6 +1,8 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.PlaytimeData;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.DataSource;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.Database;
 import dev.dejvokep.boostedyaml.YamlDocument;
 
 import java.io.File;
@@ -19,7 +21,8 @@ public class PlaytimeUtils {
     private final Object logger;
     private static PlaytimeUtils singleton = null;
     private boolean STARTED = false;
-    public DataSource dataSource;
+    public Database database;
+    public PlaytimeData playtimeData;
 
     /**
      * Constructor for the PlaytimeUtils class.
@@ -74,7 +77,10 @@ public class PlaytimeUtils {
         }
         STARTED = true;
         String type = config.getString("storage.type");
-        dataSource = DataSource.getDataSource(type, config);
+        database = DataSource.getDataSource(type, config);
+
+        playtimeData = DataSource.getPlaytimeData(type, database);
+
         useLogger("PlaytimeUtils has been started!");
     }
 

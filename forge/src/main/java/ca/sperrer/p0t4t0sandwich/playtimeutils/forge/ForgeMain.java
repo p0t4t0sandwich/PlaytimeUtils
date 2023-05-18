@@ -41,7 +41,7 @@ public class ForgeMain {
         MinecraftForge.EVENT_BUS.register(new ForgeEventListener());
 
         // Test event listeners (TODO: Remove later)
-//        MinecraftForge.EVENT_BUS.register(new ForgeTestListener());
+        MinecraftForge.EVENT_BUS.register(new ForgeTestListener());
 
         // Mod enable message
         logger.info("[PlaytimeUtils]: PlaytimeUtils has been enabled!");

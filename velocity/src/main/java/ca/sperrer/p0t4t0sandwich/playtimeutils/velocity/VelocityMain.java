@@ -60,7 +60,7 @@ public class VelocityMain {
         playtimeUtils.start();
 
         // Start Playtime Tracker
-        repeatTaskAsync(() -> playtimeUtils.dataSource.updatePlaytime(
+        repeatTaskAsync(() -> playtimeUtils.playtimeData.updatePlaytime(
             mapPlayers(
                 getServer().getAllPlayers().toArray(new Player[0])
             )),
@@ -70,7 +70,7 @@ public class VelocityMain {
         server.getEventManager().register(this, new VelocityEventListener());
 
         // Test event listener (TODO: Remove later)
-//         server.getEventManager().register(this, new VelocityTestListener());
+         server.getEventManager().register(this, new VelocityTestListener());
 
         // Plugin enable message
         this.logger.info("PlaytimeUtils has been enabled!");

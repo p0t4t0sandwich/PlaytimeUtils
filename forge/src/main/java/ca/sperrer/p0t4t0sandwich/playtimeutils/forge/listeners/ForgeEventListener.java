@@ -21,7 +21,7 @@ public class ForgeEventListener {
     @SubscribeEvent
     public void onServerStart(ServerStartingEvent event) {
         // Start Playtime Tracker
-        repeatTaskAsync(() -> mod.playtimeUtils.dataSource.updatePlaytime(
+        repeatTaskAsync(() -> mod.playtimeUtils.playtimeData.updatePlaytime(
             ForgeUtils.mapPlayers(
                     event.getServer().getPlayerList().getPlayers().toArray(new ServerPlayer[0]),
                     mod.playtimeUtils.getServerName()
@@ -33,7 +33,7 @@ public class ForgeEventListener {
     public void onPlayerConnect(PlayerEvent.PlayerLoggedInEvent event) {
         ServerPlayer player = (ServerPlayer) event.getEntity();
         runTaskAsync(() -> {
-            int streak = mod.playtimeUtils.dataSource.playerLoginData(
+            int streak = mod.playtimeUtils.playtimeData.playerLoginData(
                     mapPlayer(
                             player,
                             mod.playtimeUtils.getServerName()
@@ -48,14 +48,14 @@ public class ForgeEventListener {
             }
 
             // Test event listeners (TODO: Remove later)
-//            MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
-//            MinecraftForge.EVENT_BUS.post(new StreakResetEvent(player));
+            MinecraftForge.EVENT_BUS.post(new StreakIncrementEvent(player, streak));
+            MinecraftForge.EVENT_BUS.post(new StreakResetEvent(player));
         });
     }
 
     @SubscribeEvent
     public void onPlayerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
-        runTaskAsync(() -> mod.playtimeUtils.dataSource.playerLogoutData(
+        runTaskAsync(() -> mod.playtimeUtils.playtimeData.playerLogoutData(
                 mapPlayer(
                         (ServerPlayer) event.getEntity(),
                         mod.playtimeUtils.getServerName()

@@ -21,7 +21,7 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
     @Override
     public void onServerStarted(MinecraftServer server) {
         // Start Playtime Tracker
-        repeatTaskAsync(() -> mod.playtimeUtils.dataSource.updatePlaytime(
+        repeatTaskAsync(() -> mod.playtimeUtils.playtimeData.updatePlaytime(
                         FabricUtils.mapPlayers(
                                 server.getPlayerManager().getPlayerList().toArray(new ServerPlayerEntity[0]),
                                 mod.playtimeUtils.getServerName()
@@ -32,7 +32,7 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
     @Override
     public void onPlayReady(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
         runTaskAsync(() -> {
-            int streak = mod.playtimeUtils.dataSource.playerLoginData(
+            int streak = mod.playtimeUtils.playtimeData.playerLoginData(
                     mapPlayer(
                             handler.player,
                             mod.playtimeUtils.getServerName()
@@ -47,14 +47,14 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
             }
 
             // Test event listener (TODO: Remove later)
-//            StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
-//            StreakResetEvent.EVENT.invoker().onStreakReset(handler.player);
+            StreakIncrementEvent.EVENT.invoker().onStreakIncrement(handler.player, streak);
+            StreakResetEvent.EVENT.invoker().onStreakReset(handler.player);
         });
     }
 
     @Override
     public void onPlayDisconnect(ServerPlayNetworkHandler handler, MinecraftServer server) {
-        runTaskAsync(() -> mod.playtimeUtils.dataSource.playerLogoutData(
+        runTaskAsync(() -> mod.playtimeUtils.playtimeData.playerLogoutData(
                 mapPlayer(
                         handler.player,
                         mod.playtimeUtils.getServerName()

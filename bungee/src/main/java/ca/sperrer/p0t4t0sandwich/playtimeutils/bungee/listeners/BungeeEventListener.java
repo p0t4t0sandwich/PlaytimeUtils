@@ -18,7 +18,7 @@ public class BungeeEventListener implements Listener {
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
         runTaskAsync(() -> {
-            int streak = plugin.playtimeUtils.dataSource.playerLoginData(
+            int streak = plugin.playtimeUtils.playtimeData.playerLoginData(
                     mapPlayer(event.getPlayer())
             );
             if (streak == 1) {
@@ -32,14 +32,14 @@ public class BungeeEventListener implements Listener {
             }
 
             // Test event listener (TODO: remove later)
-//            plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
-//            plugin.getProxy().getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
+            plugin.getProxy().getPluginManager().callEvent(new StreakIncrementEvent(event.getPlayer(), streak));
+            plugin.getProxy().getPluginManager().callEvent(new StreakResetEvent(event.getPlayer()));
         });
     }
 
     @EventHandler
     public void onPlayerDisconnect(PlayerDisconnectEvent event) {
-        runTaskAsync(() -> plugin.playtimeUtils.dataSource.playerLogoutData(
+        runTaskAsync(() -> plugin.playtimeUtils.playtimeData.playerLogoutData(
                 mapPlayer(event.getPlayer())
         ));
     }
