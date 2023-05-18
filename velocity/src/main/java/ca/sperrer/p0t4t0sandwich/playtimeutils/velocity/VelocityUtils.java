@@ -16,7 +16,7 @@ public class VelocityUtils {
     public static PlayerInstance mapPlayer(Player player) {
         Optional<ServerConnection> option = player.getCurrentServer();
         String serverName = option.map(serverConnection -> serverConnection.getServerInfo().getName()).orElse("null");
-        return new PlayerInstance(player.getUsername(), player.getUniqueId().toString(), serverName);
+        return new PlayerInstance(player.getUsername(), player.getUniqueId(), serverName);
     }
 
     /**

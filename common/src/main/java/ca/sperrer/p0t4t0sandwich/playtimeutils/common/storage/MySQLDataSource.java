@@ -93,7 +93,7 @@ public class MySQLDataSource implements DataSource {
     @Override
     public int playerLoginData(PlayerInstance player) {
         long unixTime = System.currentTimeMillis() / 1000L;
-        String player_uuid = player.getUUID();
+        String player_uuid = player.getUUID().toString();
         int streak = 0;
         try {
             Connection con = getConnection();
@@ -178,7 +178,7 @@ public class MySQLDataSource implements DataSource {
             // Update Last Login
             String SQL_QUERY = "UPDATE player_data SET last_online = " + unixTime + " WHERE player_uuid = ?;";
             PreparedStatement pst = con.prepareStatement(SQL_QUERY);
-            pst.setString(1, player.getUUID());
+            pst.setString(1, player.getUUID().toString());
             pst.executeUpdate();
 
             con.close();

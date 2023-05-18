@@ -13,7 +13,7 @@ public class BungeeUtils {
      */
     public static PlayerInstance mapPlayer(ProxiedPlayer player) {
         String serverName = player.getServer() == null ? "null" : player.getServer().getInfo().getName();
-        return new PlayerInstance(player.getUniqueId().toString(), player.getName(), serverName);
+        return new PlayerInstance(player.getName(), player.getUniqueId(), serverName);
     }
 
     /**

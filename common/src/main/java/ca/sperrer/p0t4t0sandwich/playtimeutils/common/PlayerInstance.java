@@ -1,5 +1,7 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
 
+import java.util.UUID;
+
 public class PlayerInstance {
     /**
      * Class used to abstract the player data to be used in the DataSource class.
@@ -8,7 +10,7 @@ public class PlayerInstance {
      * currentServer: The server the player is currently on.
      */
     private final String playerName;
-    private final String playerUUID;
+    private final UUID playerUUID;
     private final String currentServer;
 
     /**
@@ -17,7 +19,7 @@ public class PlayerInstance {
      * @param playerUUID The player's UUID.
      * @param currentServer The server the player is currently on.
      */
-    public PlayerInstance(String playerName, String playerUUID, String currentServer) {
+    public PlayerInstance(String playerName, UUID playerUUID, String currentServer) {
         this.playerName = playerName;
         this.playerUUID = playerUUID;
         this.currentServer = currentServer;
@@ -35,7 +37,7 @@ public class PlayerInstance {
      * Get the player's UUID.
      * @return The player's UUID.
      */
-    public String getUUID() {
+    public UUID getUUID() {
         return this.playerUUID;
     }
 

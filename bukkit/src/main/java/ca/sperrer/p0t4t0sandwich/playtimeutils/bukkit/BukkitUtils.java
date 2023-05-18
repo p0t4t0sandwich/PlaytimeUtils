@@ -13,7 +13,7 @@ public class BukkitUtils {
      * @return PlayerInstance
      */
     public static PlayerInstance mapPlayer(Player player, String serverName) {
-        return new PlayerInstance(player.getName(), player.getUniqueId().toString(), serverName);
+        return new PlayerInstance(player.getName(), player.getUniqueId(), serverName);
     }
 
     /**

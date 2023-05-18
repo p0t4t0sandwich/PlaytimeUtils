@@ -87,7 +87,7 @@ public class MongoDBDataSource implements DataSource {
     @Override
     public int playerLoginData(PlayerInstance player) {
         long unixTime = System.currentTimeMillis() / 1000L;
-        String player_uuid = player.getUUID();
+        String player_uuid = player.getUUID().toString();
         int streak = 0;
         // `player_uuid`, `player_name`, first_login, last_online, last_streak, streak
         try {
@@ -152,7 +152,7 @@ public class MongoDBDataSource implements DataSource {
     @Override
     public void playerLogoutData(PlayerInstance player) {
         long unixTime = System.currentTimeMillis() / 1000L;
-        String player_uuid = player.getUUID();
+        String player_uuid = player.getUUID().toString();
         try {
             // Update Last Login
             MongoDatabase db = mongoClient.getDatabase(database);
