@@ -25,13 +25,14 @@ public class MongoDBPlaytimeData extends PlaytimeData {
         System.out.println("Updating playtime for " + players.size() + " players");
         for (PlayerInstance player : players) {
             String server_name = player.getCurrentServer();
+            String player_uuid = player.getUUID().toString();
             try {
                 MongoClient mongoClient = (MongoClient) this.db.getConnection();
                 String database = this.db.getDatabase();
 
                 MongoDatabase db = mongoClient.getDatabase(database);
                 MongoCollection<Document> collection = db.getCollection("player_data");
-                Document query = new Document("player_uuid", player.getUUID());
+                Document query = new Document("player_uuid", player_uuid);
 
                 // Get player data
                 Document player_data = collection.find(query).first();
@@ -39,7 +40,7 @@ public class MongoDBPlaytimeData extends PlaytimeData {
                     // Player data doesn't exist, create it
                     Document new_player_data = new Document();
                     new_player_data.append("player_name", player.getName());
-                    new_player_data.append("player_uuid", player.getUUID());
+                    new_player_data.append("player_uuid", player_uuid);
                     new_player_data.append("playtime." + server_name, 0);
                     collection.insertOne(new_player_data);
                     continue;
