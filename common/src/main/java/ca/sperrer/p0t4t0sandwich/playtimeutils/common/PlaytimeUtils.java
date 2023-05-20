@@ -1,8 +1,10 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common;
 
-import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.PlaytimeData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.ranks.RankData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker.TrackerData;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.DataSource;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.Database;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.utils.UtilData;
 import dev.dejvokep.boostedyaml.YamlDocument;
 
 import java.io.File;
@@ -22,7 +24,9 @@ public class PlaytimeUtils {
     private static PlaytimeUtils singleton = null;
     private boolean STARTED = false;
     public Database database;
-    public PlaytimeData playtimeData;
+    public TrackerData trackerData;
+    public RankData rankData;
+    public UtilData utilData;
 
     /**
      * Constructor for the PlaytimeUtils class.
@@ -79,7 +83,9 @@ public class PlaytimeUtils {
         String type = config.getString("storage.type");
         database = DataSource.getDataSource(type, config);
 
-        playtimeData = DataSource.getPlaytimeData(type, database);
+        trackerData = DataSource.getTrackerData(type, database);
+        rankData = DataSource.getRankData(type, database);
+        utilData = DataSource.getUtilData(type, database);
 
         useLogger("PlaytimeUtils has been started!");
     }

@@ -43,7 +43,7 @@ public class BukkitMain extends JavaPlugin {
         playtimeUtils.start();
 
         // Start Playtime Tracker
-        repeatTaskAsync(() -> playtimeUtils.playtimeData.updatePlaytime(
+        repeatTaskAsync(() -> playtimeUtils.trackerData.updatePlaytime(
                 BukkitUtils.mapPlayers(
                         getServer().getOnlinePlayers().toArray(new Player[0]),
                         playtimeUtils.getServerName()

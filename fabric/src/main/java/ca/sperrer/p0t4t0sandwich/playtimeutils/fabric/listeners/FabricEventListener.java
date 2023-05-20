@@ -21,7 +21,7 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
     @Override
     public void onServerStarted(MinecraftServer server) {
         // Start Playtime Tracker
-        repeatTaskAsync(() -> mod.playtimeUtils.playtimeData.updatePlaytime(
+        repeatTaskAsync(() -> mod.playtimeUtils.trackerData.updatePlaytime(
                         FabricUtils.mapPlayers(
                                 server.getPlayerManager().getPlayerList().toArray(new ServerPlayerEntity[0]),
                                 mod.playtimeUtils.getServerName()
@@ -32,7 +32,7 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
     @Override
     public void onPlayReady(ServerPlayNetworkHandler handler, PacketSender sender, MinecraftServer server) {
         runTaskAsync(() -> {
-            int streak = mod.playtimeUtils.playtimeData.playerLoginData(
+            int streak = mod.playtimeUtils.trackerData.playerLoginData(
                     mapPlayer(
                             handler.player,
                             mod.playtimeUtils.getServerName()
@@ -54,7 +54,7 @@ public class FabricEventListener implements ServerLifecycleEvents.ServerStarted,
 
     @Override
     public void onPlayDisconnect(ServerPlayNetworkHandler handler, MinecraftServer server) {
-        runTaskAsync(() -> mod.playtimeUtils.playtimeData.playerLogoutData(
+        runTaskAsync(() -> mod.playtimeUtils.trackerData.playerLogoutData(
                 mapPlayer(
                         handler.player,
                         mod.playtimeUtils.getServerName()

@@ -1,4 +1,4 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.Database;
@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MySQLPlaytimeData extends PlaytimeData {
-    public MySQLPlaytimeData(Database<Connection> database) {
+public class MySQLTrackerData extends TrackerData {
+    public MySQLTrackerData(Database<Connection> database) {
         super(database);
     }
 

@@ -60,7 +60,7 @@ public class VelocityMain {
         playtimeUtils.start();
 
         // Start Playtime Tracker
-        repeatTaskAsync(() -> playtimeUtils.playtimeData.updatePlaytime(
+        repeatTaskAsync(() -> playtimeUtils.trackerData.updatePlaytime(
             mapPlayers(
                 getServer().getAllPlayers().toArray(new Player[0])
             )),

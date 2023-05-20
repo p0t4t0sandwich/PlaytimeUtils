@@ -1,8 +1,14 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
-import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.MongoDBPlaytimeData;
-import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.MySQLPlaytimeData;
-import ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime.PlaytimeData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.ranks.MongoDBRankData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.ranks.MySQLRankData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.ranks.RankData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker.MongoDBTrackerData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker.MySQLTrackerData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker.TrackerData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.utils.MongoDBUtilData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.utils.MySQLUtilData;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.common.utils.UtilData;
 import dev.dejvokep.boostedyaml.YamlDocument;
 
 
@@ -30,12 +36,34 @@ public interface DataSource {
      * @param database The database
      * @return The playtime data class
      */
-    static PlaytimeData getPlaytimeData(String type, Database database) {
+    static TrackerData getTrackerData(String type, Database database) {
         switch (type) {
             case "mysql":
-                return new MySQLPlaytimeData(database);
+                return new MySQLTrackerData(database);
             case "mongodb":
-                return new MongoDBPlaytimeData(database);
+                return new MongoDBTrackerData(database);
+            default:
+                return null;
+        }
+    }
+
+    static RankData getRankData(String type, Database database) {
+        switch (type) {
+            case "mysql":
+                return new MySQLRankData(database);
+            case "mongodb":
+                return new MongoDBRankData(database);
+            default:
+                return null;
+        }
+    }
+
+    static UtilData getUtilData(String type, Database database) {
+        switch (type) {
+            case "mysql":
+                return new MySQLUtilData(database);
+            case "mongodb":
+                return new MongoDBUtilData(database);
             default:
                 return null;
         }

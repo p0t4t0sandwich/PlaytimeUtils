@@ -1,4 +1,4 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.Database;
@@ -9,8 +9,8 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 
-public class MongoDBPlaytimeData extends PlaytimeData {
-    public MongoDBPlaytimeData(Database<MongoClient> database) {
+public class MongoDBTrackerData extends TrackerData {
+    public MongoDBTrackerData(Database<MongoClient> database) {
         super(database);
     }
 
@@ -70,7 +70,7 @@ public class MongoDBPlaytimeData extends PlaytimeData {
         long unixTime = System.currentTimeMillis() / 1000L;
         String player_uuid = player.getUUID().toString();
         int streak = 0;
-        // `player_uuid`, `player_name`, first_login, last_online, last_streak, streak
+
         try {
             MongoClient mongoClient = (MongoClient) this.db.getConnection();
             String database = this.db.getDatabase();

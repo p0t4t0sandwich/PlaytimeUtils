@@ -1,14 +1,14 @@
-package ca.sperrer.p0t4t0sandwich.playtimeutils.common.playtime;
+package ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.Database;
 
 import java.util.ArrayList;
 
-public abstract class PlaytimeData {
+public abstract class TrackerData {
     final Database db;
 
-    public PlaytimeData(Database database) {
+    public TrackerData(Database database) {
         this.db = database;
     }
 

@@ -34,7 +34,7 @@ public class BungeeMain extends Plugin {
         playtimeUtils.start();
 
         // Start Playtime Tracker
-        repeatTaskAsync(() -> playtimeUtils.playtimeData.updatePlaytime(
+        repeatTaskAsync(() -> playtimeUtils.trackerData.updatePlaytime(
                         mapPlayers(
                                 getProxy().getPlayers().toArray(new ProxiedPlayer[0])
                         )),

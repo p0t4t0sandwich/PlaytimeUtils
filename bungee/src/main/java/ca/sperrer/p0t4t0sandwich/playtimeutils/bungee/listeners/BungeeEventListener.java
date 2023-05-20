@@ -18,7 +18,7 @@ public class BungeeEventListener implements Listener {
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
         runTaskAsync(() -> {
-            int streak = plugin.playtimeUtils.playtimeData.playerLoginData(
+            int streak = plugin.playtimeUtils.trackerData.playerLoginData(
                     mapPlayer(event.getPlayer())
             );
             if (streak == 1) {
@@ -39,7 +39,7 @@ public class BungeeEventListener implements Listener {
 
     @EventHandler
     public void onPlayerDisconnect(PlayerDisconnectEvent event) {
-        runTaskAsync(() -> plugin.playtimeUtils.playtimeData.playerLogoutData(
+        runTaskAsync(() -> plugin.playtimeUtils.trackerData.playerLogoutData(
                 mapPlayer(event.getPlayer())
         ));
     }

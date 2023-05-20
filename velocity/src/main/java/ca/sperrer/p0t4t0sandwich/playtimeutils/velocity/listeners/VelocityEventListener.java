@@ -17,7 +17,7 @@ public class VelocityEventListener {
     @Subscribe
     public void onPlayerLogin(LoginEvent event) {
         runTaskAsync(() -> {
-            int streak = plugin.playtimeUtils.playtimeData.playerLoginData(
+            int streak = plugin.playtimeUtils.trackerData.playerLoginData(
                 mapPlayer(event.getPlayer())
             );
             if (streak == 1) {
@@ -36,7 +36,7 @@ public class VelocityEventListener {
 
     @Subscribe
     public void onPlayerQuit(DisconnectEvent event) {
-        runTaskAsync(() -> plugin.playtimeUtils.playtimeData.playerLogoutData(
+        runTaskAsync(() -> plugin.playtimeUtils.trackerData.playerLogoutData(
             mapPlayer(event.getPlayer())
         ));
     }
