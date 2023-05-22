@@ -2,10 +2,32 @@
 
 Plugin for various playtime-related tools
 
+## Features
+
+### Playtime tracking
+
+Tracks the playtime of players and stores it in a database.
+
+### Streaks
+
+Tracks the streak of players and stores it in a database. Players need to log on every day to keep their streak.
+There are events for streak increment and streak reset.
+
+### Ranks
+
+Players can rank up based on their playtime. Just add a rank to the config and set the required playtime.
+
+## Commands
+
+| Command | Permission | Description |
+| --- | --- | --- |
+| `/playtime` | `playtimeutils.playtime` | Shows the playtime of the player |
+
 ## TODO
 
-- [x] Add Velocity support
 - [ ] Add a command to check playtime
+  - [ ] Fabric support
+  - [ ] Forge support
 - [ ] Add a command to check playtime of other players
 - [x] Events for streak increase/reset
 - [ ] API for all that stuff
@@ -15,4 +37,4 @@ Plugin for various playtime-related tools
 - [ ] add h2 support
 - [ ] add filestorage support
 - [ ] make sure player schema is compliant with account link system
-- [ ] design migration utils (migrate to file, then migrate to chosen db)
+- [ ] add config section for commands to run on streak increment/reset

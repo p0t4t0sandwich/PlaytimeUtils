@@ -1,5 +1,6 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.bungee;
 
+import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.commands.PlaytimeCommand;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.listeners.BungeeEventListener;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.test.BungeeTestListener;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlaytimeUtils;
@@ -42,6 +43,9 @@ public class BungeeMain extends Plugin {
 
         // Register event listener
         getProxy().getPluginManager().registerListener(this, new BungeeEventListener());
+
+        // Register commands
+        getProxy().getPluginManager().registerCommand(this, new PlaytimeCommand());
 
         // Test event listener (TODO: remove later)
         getProxy().getPluginManager().registerListener(this, new BungeeTestListener());

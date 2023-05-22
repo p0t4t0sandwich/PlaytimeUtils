@@ -2,3 +2,7 @@ name: PlaytimeUtils
 version: '${version}'
 author: p0t4t0sandwich
 main: ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.BungeeMain
+commands:
+  playtime:
+    description: Get the playtime of a player
+    usage: /playtime

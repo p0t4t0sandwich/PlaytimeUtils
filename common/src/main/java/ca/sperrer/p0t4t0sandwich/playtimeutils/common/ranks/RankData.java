@@ -12,6 +12,4 @@ public abstract class RankData {
         this.db = database;
         this.luckPerms = LuckPermsProvider.get();
     }
-
-
 }
