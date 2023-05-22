@@ -56,6 +56,7 @@ public class BukkitMain extends JavaPlugin {
 
         // Register commands
         getCommand("playtime").setExecutor(new PlaytimeCommand());
+        getCommand("streak").setExecutor(new PlaytimeCommand());
 
         // Test event listener (TODO: remove later)
          getServer().getPluginManager().registerEvents(new BukkitTestListener(), this);

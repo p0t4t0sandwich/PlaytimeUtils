@@ -49,4 +49,43 @@ public class MySQLUtilData extends UtilData {
             return playtime;
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public int getStreak(PlayerInstance player) {
+        String player_uuid = player.getUUID().toString();
+        Connection con;
+        int streak = 0;
+
+        try {
+            con = (Connection) db.getConnection();
+
+            // Get streak from database
+            String SQL_QUERY = "SELECT * FROM streak WHERE `player_id`=(SELECT player_id FROM `player_data` WHERE `player_uuid`='" + player_uuid + "')";
+            PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+            pst.setString(1, player_uuid);
+            ResultSet rs = pst.executeQuery(SQL_QUERY);
+            if (rs.next()) {
+                streak = rs.getInt("streak");
+            } else {
+                // If streak doesn't exist, create it
+                SQL_QUERY = "INSERT INTO streak (player_id, streak) VALUES ((SELECT player_id FROM `player_data` WHERE `player_uuid`='" + player_uuid + "'), 0)";
+                pst = con.prepareStatement(SQL_QUERY);
+                pst.setString(1, player_uuid);
+                pst.executeUpdate();
+            }
+
+            // Close connections
+            rs.close();
+            con.close();
+            return streak;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return streak;
+        }
+
+    }
 }

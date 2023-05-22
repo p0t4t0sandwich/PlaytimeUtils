@@ -7,3 +7,6 @@ commands:
   playtime:
     description: Get the playtime of a player
     usage: /playtime
+  streak:
+    description: Get the current streak of a player
+    usage: /streak

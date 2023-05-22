@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static ca.sperrer.p0t4t0sandwich.playtimeutils.bukkit.BukkitUtils.mapPlayer;
 import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
 
-public class PlaytimeCommand implements CommandExecutor {
+public class StreakCommand implements CommandExecutor {
     private final BukkitMain plugin = BukkitMain.getInstance();
 
     @Override
@@ -26,11 +26,8 @@ public class PlaytimeCommand implements CommandExecutor {
                 if ((sender instanceof Player)) {
                     Player player = (Player) sender;
 
-                    int playtime = plugin.playtimeUtils.utilData.getPlaytime(mapPlayer(player, plugin.playtimeUtils.getServerName()));
-                    int days = playtime / 1440;
-                    int hours = (playtime - (days * 1440)) / 60;
-                    int minutes = playtime - (days * 1440) - (hours * 60);
-                    String text = "Your playtime is: " + days + "D " + hours + "H " + minutes + "M";
+                    int streak = plugin.playtimeUtils.utilData.getStreak(mapPlayer(player, plugin.playtimeUtils.getServerName()));
+                    String text = "Your streak is " + streak + "D! Keep up the good work!";
 
                     player.sendMessage(Arrays.toString(new ComponentBuilder(text).color(ChatColor.GREEN).create()));
                     success.set(true);

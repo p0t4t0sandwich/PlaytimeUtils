@@ -54,4 +54,38 @@ public class MongoDBUtilData extends UtilData {
             return 0;
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public int getStreak(PlayerInstance player) {
+        String player_uuid = player.getUUID().toString();
+
+        try {
+            MongoClient mongoClient = (MongoClient) this.db.getConnection();
+            String database = this.db.getDatabase();
+
+            // Get player data
+            MongoDatabase db = mongoClient.getDatabase(database);
+            MongoCollection<Document> collection = db.getCollection("player_data");
+            Document query = new Document("player_uuid", player_uuid);
+            Document player_data = collection.find(query).first();
+
+            // If player data doesn't exist, create it
+            if (player_data == null) {
+                Document new_player_data = new Document();
+                new_player_data.append("player_name", player.getName());
+                new_player_data.append("player_uuid", player_uuid);
+                collection.insertOne(new_player_data);
+                return 1;
+            }
+
+            return player_data.getInteger("streak");
+
+        } catch (Exception e) {
+            System.out.println("Error getting streak for " + player.getName());
+            return 0;
+        }
+    }
 }

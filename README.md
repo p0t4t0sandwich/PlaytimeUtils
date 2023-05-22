@@ -22,19 +22,23 @@ Players can rank up based on their playtime. Just add a rank to the config and s
 | Command | Permission | Description |
 | --- | --- | --- |
 | `/playtime` | `playtimeutils.playtime` | Shows the playtime of the player |
+| `/streak` | `playtimeutils.streak` | Shows the streak of the player |
 
 ## TODO
 
 - [ ] Add a command to check playtime
   - [ ] Fabric support
   - [ ] Forge support
+- [ ] Add a command to check streak
+  - [ ] Fabric support
+  - [ ] Forge support
 - [ ] Add a command to check playtime of other players
 - [x] Events for streak increase/reset
 - [ ] API for all that stuff
-- [ ] Add a command to check streak
 - [ ] Check the progress till the next rank
 - [ ] add sqlite support
 - [ ] add h2 support
 - [ ] add filestorage support
 - [ ] make sure player schema is compliant with account link system
-- [ ] add config section for commands to run on streak increment/reset
+- [ ] add config section for commands to run on events triggered by the plugin
+- [ ] Events for rank up

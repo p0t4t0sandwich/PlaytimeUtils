@@ -10,5 +10,17 @@ public abstract class UtilData {
         this.db = database;
     }
 
+    /**
+     * Get the playtime of a player
+     * @param player The player to get the playtime of
+     * @return The playtime of the player
+     */
     public abstract int getPlaytime(PlayerInstance player);
+
+    /**
+     * Get the streak of a player
+     * @param player The player to get the streak of
+     * @return The streak of the player
+     */
+    public abstract int getStreak(PlayerInstance player);
 }

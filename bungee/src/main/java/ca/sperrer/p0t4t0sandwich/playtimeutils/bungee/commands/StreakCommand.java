@@ -10,11 +10,11 @@ import net.md_5.bungee.api.plugin.Command;
 import static ca.sperrer.p0t4t0sandwich.playtimeutils.bungee.BungeeUtils.mapPlayer;
 import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
 
-public class PlaytimeCommand extends Command {
+public class StreakCommand extends Command {
     private final BungeeMain plugin = BungeeMain.getInstance();
 
-    public PlaytimeCommand() {
-        super("playtime");
+    public StreakCommand() {
+        super("streak");
     }
 
     @Override
@@ -25,11 +25,8 @@ public class PlaytimeCommand extends Command {
                 if ((sender instanceof ProxiedPlayer)) {
                     ProxiedPlayer player = (ProxiedPlayer) sender;
 
-                    int playtime = plugin.playtimeUtils.utilData.getPlaytime(mapPlayer(player));
-                    int days = playtime / 1440;
-                    int hours = (playtime - (days * 1440)) / 60;
-                    int minutes = playtime - (days * 1440) - (hours * 60);
-                    String text = "Your playtime is: " + days + "D " + hours + "H " + minutes + "M";
+                    int streak = plugin.playtimeUtils.utilData.getStreak(mapPlayer(player));
+                    String text = "Your streak is " + streak + "D! Keep up the good work!";
 
                     player.sendMessage(new ComponentBuilder(text).color(ChatColor.GREEN).create());
                 }

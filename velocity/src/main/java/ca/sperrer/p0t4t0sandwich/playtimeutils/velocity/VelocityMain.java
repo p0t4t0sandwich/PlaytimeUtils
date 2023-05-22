@@ -2,6 +2,7 @@ package ca.sperrer.p0t4t0sandwich.playtimeutils.velocity;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlaytimeUtils;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.commands.PlaytimeCommand;
+import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.commands.StreakCommand;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.listeners.VelocityEventListener;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.test.VelocityTestListener;
 import com.google.inject.Inject;
@@ -71,7 +72,8 @@ public class VelocityMain {
         server.getEventManager().register(this, new VelocityEventListener());
 
         // Register commands
-        server.getCommandManager().register("pronouns", new PlaytimeCommand());
+        server.getCommandManager().register("playtime", new PlaytimeCommand());
+        server.getCommandManager().register("streak", new StreakCommand());
 
         // Test event listener (TODO: Remove later)
          server.getEventManager().register(this, new VelocityTestListener());

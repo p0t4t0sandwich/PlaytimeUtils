@@ -9,7 +9,7 @@ import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
 import static ca.sperrer.p0t4t0sandwich.playtimeutils.velocity.VelocityUtils.mapPlayer;
 import static net.kyori.adventure.text.format.NamedTextColor.GREEN;
 
-public class PlaytimeCommand implements SimpleCommand {
+public class StreakCommand implements SimpleCommand {
     private final VelocityMain plugin = VelocityMain.getInstance();
 
     @Override
@@ -20,11 +20,8 @@ public class PlaytimeCommand implements SimpleCommand {
                 if ((invocation.source() instanceof Player)) {
                     Player player = (Player) invocation.source();
 
-                    int playtime = plugin.playtimeUtils.utilData.getPlaytime(mapPlayer(player));
-                    int days = playtime / 1440;
-                    int hours = (playtime - (days * 1440)) / 60;
-                    int minutes = playtime - (days * 1440) - (hours * 60);
-                    String text = "Your playtime is: " + days + "D " + hours + "H " + minutes + "M";
+                    int streak = plugin.playtimeUtils.utilData.getStreak(mapPlayer(player));
+                    String text = "Your streak is " + streak + "D! Keep up the good work!";
 
                     player.sendMessage(Component.text(text).color(GREEN));
                 }
