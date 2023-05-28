@@ -14,14 +14,14 @@ import dev.dejvokep.boostedyaml.YamlDocument;
 import java.util.Arrays;
 
 
-public interface DataSource {
+public class DataSource {
     /**
      * Get the database
      * @param type The type of database
      * @param config The config file
      * @return The database
      */
-    static Database getDataSource(String type, YamlDocument config) {
+    public static Database getDataSource(String type, YamlDocument config) {
         try {
             switch (type) {
                 case "mysql":
@@ -43,9 +43,9 @@ public interface DataSource {
      * @param database The database
      * @return The playtime data class
      */
-    static TrackerData getTrackerData(String type, Database database) {
+    public static TrackerData getTrackerData(Database database) {
         try {
-            switch (type) {
+            switch (database.getType()) {
                 case "mysql":
                     return new MySQLTrackerData(database);
                 case "mongodb":
@@ -59,9 +59,9 @@ public interface DataSource {
         }
     }
 
-    static RankData getRankData(String type, Database database) {
+    public static RankData getRankData(Database database) {
         try {
-            switch (type) {
+            switch (database.getType()) {
                 case "mysql":
                     return new MySQLRankData(database);
                 case "mongodb":
@@ -75,9 +75,9 @@ public interface DataSource {
         }
     }
 
-    static UtilData getUtilData(String type, Database database) {
+    public static UtilData getUtilData(Database database) {
         try {
-            switch (type) {
+            switch (database.getType()) {
                 case "mysql":
                     return new MySQLUtilData(database);
                 case "mongodb":

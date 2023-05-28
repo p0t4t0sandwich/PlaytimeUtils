@@ -83,9 +83,9 @@ public class PlaytimeUtils {
         String type = config.getString("storage.type");
         database = DataSource.getDataSource(type, config);
 
-        trackerData = DataSource.getTrackerData(type, database);
-        rankData = DataSource.getRankData(type, database);
-        utilData = DataSource.getUtilData(type, database);
+        trackerData = DataSource.getTrackerData(database);
+        rankData = DataSource.getRankData(database);
+        utilData = DataSource.getUtilData(database);
 
         useLogger("PlaytimeUtils has been started!");
     }
