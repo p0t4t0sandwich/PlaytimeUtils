@@ -21,10 +21,16 @@ shadowJar {
     dependencies {
         include(dependency("dev.dejvokep:boosted-yaml:1.3"))
         include(dependency("com.zaxxer:HikariCP:4.0.3"))
+        include(dependency("mysql:mysql-connector-java:8.0.26"))
         include(dependency('org.mongodb:mongodb-driver-sync:4.9.1'))
         include(dependency('org.mongodb:mongodb-driver-core:4.9.1'))
         include(dependency('org.mongodb:bson:4.9.1'))
     }
+
+    relocate 'dev.dejvokep', 'ca.sperrer.p0t4t0sandwich.playtimeutils.lib.dejvokep'
+    relocate 'com.zaxxer.hikari', 'ca.sperrer.p0t4t0sandwich.playtimeutils.lib.hikari'
+    relocate 'com.mysql', 'ca.sperrer.p0t4t0sandwich.playtimeutils.lib.mysql'
+    relocate 'org.mongodb', 'ca.sperrer.p0t4t0sandwich.playtimeutils.lib.mongodb'
 }
 
 artifacts {

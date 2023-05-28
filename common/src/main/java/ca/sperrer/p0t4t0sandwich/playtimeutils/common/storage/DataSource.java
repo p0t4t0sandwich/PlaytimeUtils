@@ -11,6 +11,8 @@ import ca.sperrer.p0t4t0sandwich.playtimeutils.common.utils.MySQLUtilData;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.utils.UtilData;
 import dev.dejvokep.boostedyaml.YamlDocument;
 
+import java.util.Arrays;
+
 
 public interface DataSource {
     /**
@@ -20,13 +22,18 @@ public interface DataSource {
      * @return The database
      */
     static Database getDataSource(String type, YamlDocument config) {
-        switch (type) {
-            case "mysql":
-                return new MySQLDatabase(config);
-            case "mongodb":
-                return new MongoDBDatabase(config);
-            default:
-                return null;
+        try {
+            switch (type) {
+                case "mysql":
+                    return new MySQLDatabase(config);
+                case "mongodb":
+                    return new MongoDBDatabase(config);
+                default:
+                    return null;
+            }
+        } catch (Exception e) {
+            System.err.println(Arrays.toString(e.getStackTrace()));
+            return null;
         }
     }
 
@@ -37,35 +44,50 @@ public interface DataSource {
      * @return The playtime data class
      */
     static TrackerData getTrackerData(String type, Database database) {
-        switch (type) {
-            case "mysql":
-                return new MySQLTrackerData(database);
-            case "mongodb":
-                return new MongoDBTrackerData(database);
-            default:
-                return null;
+        try {
+            switch (type) {
+                case "mysql":
+                    return new MySQLTrackerData(database);
+                case "mongodb":
+                    return new MongoDBTrackerData(database);
+                default:
+                    return null;
+            }
+        } catch (Exception e) {
+            System.err.println(Arrays.toString(e.getStackTrace()));
+            return null;
         }
     }
 
     static RankData getRankData(String type, Database database) {
-        switch (type) {
-            case "mysql":
-                return new MySQLRankData(database);
-            case "mongodb":
-                return new MongoDBRankData(database);
-            default:
-                return null;
+        try {
+            switch (type) {
+                case "mysql":
+                    return new MySQLRankData(database);
+                case "mongodb":
+                    return new MongoDBRankData(database);
+                default:
+                    return null;
+            }
+        } catch (Exception e) {
+            System.err.println(Arrays.toString(e.getStackTrace()));
+            return null;
         }
     }
 
     static UtilData getUtilData(String type, Database database) {
-        switch (type) {
-            case "mysql":
-                return new MySQLUtilData(database);
-            case "mongodb":
-                return new MongoDBUtilData(database);
-            default:
-                return null;
+        try {
+            switch (type) {
+                case "mysql":
+                    return new MySQLUtilData(database);
+                case "mongodb":
+                    return new MongoDBUtilData(database);
+                default:
+                    return null;
+            }
+        } catch (Exception e) {
+            System.err.println(Arrays.toString(e.getStackTrace()));
+            return null;
         }
     }
 }

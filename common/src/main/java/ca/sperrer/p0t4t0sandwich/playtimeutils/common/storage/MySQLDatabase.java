@@ -6,6 +6,7 @@ import dev.dejvokep.boostedyaml.YamlDocument;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class MySQLDatabase extends Database<Connection> {
     /**
@@ -13,33 +14,34 @@ public class MySQLDatabase extends Database<Connection> {
      * config: The configuration for the SQL data source.
      * ds: The data source.
      */
-    private static final HikariConfig config = new HikariConfig();
+    private static final HikariConfig dbconfig = new HikariConfig();
     private static HikariDataSource ds;
 
     /**
      * Constructor for the MySQLDataSource class
-     * @param sql_config The configuration for the MySQL data source.
+     * @param config The configuration for the MySQL data source.
      */
-    public MySQLDatabase(YamlDocument sql_config) {
+    public MySQLDatabase(YamlDocument config) {
         super("mysql", null, null);
-        String host = sql_config.getString("storage.config.host");
-        int port = Integer.parseInt(sql_config.getString("storage.config.port"));
-        String database = sql_config.getString("storage.config.database");
-        String username = sql_config.getString("storage.config.username");
-        String password = sql_config.getString("storage.config.password");
+
+        String host = config.getString("storage.config.host");
+        int port = Integer.parseInt(config.getString("storage.config.port"));
+        String database = config.getString("storage.config.database");
+        String username = config.getString("storage.config.username");
+        String password = config.getString("storage.config.password");
 
         if (port == 0) {
             port = 3306;
         }
-        String URI = "jdbc:mysql://" + host + ":" + port + "/" + database;
-        config.setJdbcUrl(URI);
-        config.setUsername(username);
-        config.setPassword(password);
-        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.addDataSourceProperty("cachePrepStmts", "true");
-        config.addDataSourceProperty("prepStmtCacheSize", "250");
-        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-        ds = new HikariDataSource(config);
+        String URI = "jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false&serverTimezone=UTC";
+        dbconfig.setJdbcUrl(URI);
+        dbconfig.setUsername(username);
+        dbconfig.setPassword(password);
+        dbconfig.setDriverClassName("ca.sperrer.p0t4t0sandwich.playtimeutils.lib.mysql.cj.jdbc.Driver");
+        dbconfig.addDataSourceProperty("cachePrepStmts", "true");
+        dbconfig.addDataSourceProperty("prepStmtCacheSize", "250");
+        dbconfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        ds = new HikariDataSource(dbconfig);
 
         setConnection(getConnection());
         setDatabase(database);
@@ -50,7 +52,7 @@ public class MySQLDatabase extends Database<Connection> {
         try {
             return ds.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println(Arrays.toString(e.getStackTrace()));
             return null;
         }
     }
