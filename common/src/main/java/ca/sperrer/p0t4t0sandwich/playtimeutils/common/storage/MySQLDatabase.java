@@ -1,8 +1,8 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.neuralnexus.taterlib.lib.hikari.HikariConfig;
+import dev.neuralnexus.taterlib.lib.hikari.HikariDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,7 +37,7 @@ public class MySQLDatabase extends Database<Connection> {
         dbconfig.setJdbcUrl(URI);
         dbconfig.setUsername(username);
         dbconfig.setPassword(password);
-        dbconfig.setDriverClassName("ca.sperrer.p0t4t0sandwich.playtimeutils.lib.mysql.cj.jdbc.Driver");
+        dbconfig.setDriverClassName("dev.neuralnexus.taterlib.lib.mysql.cj.jdbc.Driver");
         dbconfig.addDataSourceProperty("cachePrepStmts", "true");
         dbconfig.addDataSourceProperty("prepStmtCacheSize", "250");
         dbconfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

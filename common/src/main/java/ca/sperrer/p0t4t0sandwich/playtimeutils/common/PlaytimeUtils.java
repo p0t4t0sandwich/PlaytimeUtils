@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import static ca.sperrer.p0t4t0sandwich.playtimeutils.common.Utils.runTaskAsync;
+
 public class PlaytimeUtils {
     /**
      * Properties of the PlaytimeUtils class.
@@ -75,19 +77,27 @@ public class PlaytimeUtils {
      * Start PlaytimeUtils
      */
     public void start() {
-        if (STARTED) {
-            useLogger("PlaytimeUtils has already started!");
-            return;
-        }
-        STARTED = true;
-        String type = config.getString("storage.type");
-        database = DataSource.getDataSource(type, config);
+        runTaskAsync(() -> {
+            try {
+                if (STARTED) {
+                    useLogger("PlaytimeUtils has already started!");
+                    return;
+                }
+                STARTED = true;
+                String type = config.getString("storage.type");
+                database = DataSource.getDataSource(type, config);
 
-        trackerData = DataSource.getTrackerData(database);
-        rankData = DataSource.getRankData(database);
-        utilData = DataSource.getUtilData(database);
+                trackerData = DataSource.getTrackerData(database);
+                rankData = DataSource.getRankData(database);
+                utilData = DataSource.getUtilData(database);
 
-        useLogger("PlaytimeUtils has been started!");
+                useLogger("PlaytimeUtils has been started!");
+            } catch (Exception e) {
+                useLogger("Failed to start PlaytimeUtils!");
+                System.err.println(e);
+                e.printStackTrace();
+            }
+        });
     }
 
     /**

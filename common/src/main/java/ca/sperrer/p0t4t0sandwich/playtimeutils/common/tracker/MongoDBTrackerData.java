@@ -2,10 +2,10 @@ package ca.sperrer.p0t4t0sandwich.playtimeutils.common.tracker;
 
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.PlayerInstance;
 import ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage.Database;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+import dev.neuralnexus.taterlib.lib.bson.Document;
+import dev.neuralnexus.taterlib.lib.mongodb.client.MongoClient;
+import dev.neuralnexus.taterlib.lib.mongodb.client.MongoCollection;
+import dev.neuralnexus.taterlib.lib.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
 

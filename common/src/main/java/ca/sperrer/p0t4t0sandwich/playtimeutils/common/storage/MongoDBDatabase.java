@@ -1,8 +1,8 @@
 package ca.sperrer.p0t4t0sandwich.playtimeutils.common.storage;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import dev.dejvokep.boostedyaml.YamlDocument;
+import dev.neuralnexus.taterlib.lib.mongodb.client.MongoClient;
+import dev.neuralnexus.taterlib.lib.mongodb.client.MongoClients;
 
 public class MongoDBDatabase extends Database<MongoClient> {
     /**
